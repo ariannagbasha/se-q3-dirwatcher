@@ -22,6 +22,7 @@ import logging
 # CRITICAL(50)       A serious error, indicating that the program itself may be 
 #                    unable to continue running.
 
+
 exit_flag = False
 global_dict = {}
 logger = logging.getLogger(__name__)
