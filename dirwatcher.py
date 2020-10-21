@@ -1,6 +1,6 @@
 
 
-__author__ = "Gabby and got Pete's help and got Tracy's help as well"
+__author__ = "ariannagbasha and got Pete's help and got Tracy's help as well"
 
 
 import sys
@@ -43,6 +43,10 @@ def search_for_magic(filename, start_line, magic_string):
         for line_num, line_string in enumerate(f):
             if line_string.find(magic_string) != -1:
                 print(filename, line_num + 1)
+
+
+def scan_single_file(dirname):
+    """"""
 
 
 def detect_added_files(dirname):
@@ -91,6 +95,7 @@ def signal_handler(sig_num, frame):
     if signal.Signals(sig_num).name == 'SIGINT':
         logger.warning('Received ' + signal.Signals(sig_num).name)
     exit_flag = True
+    return None
 
 
 def main(args):
