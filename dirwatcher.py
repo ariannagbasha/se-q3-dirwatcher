@@ -37,26 +37,41 @@ logger.addHandler(stream_handler)
 
 
 def search_for_magic(filename, start_line, magic_string):
+    """ Searches for magic string by opening the file, iterating through the file
+    And looking for the magic string with the special nature of find"""
     with open(filename) as f:
         for line_num, line_string in enumerate(f):
             if line_string.find(magic_string) != -1:
-                print(filename, line_num)
+                print(filename, line_num + 1)
+
+
+def detect_added_files(dirname):
+    """This will"""
+    pass
+
+
+def detect_removed_files(dirname):
+    """"""
+    pass
+
 
 
 def watch_directory(path, magic_string, extension, interval):
+    """ """
     file_ls = os.listdir(path)
     for file_name in file_ls:
         search_for_magic(path + '/' + file_name, 0, magic_string)
 
 
 def create_parser():
+    """ """
     parser = argparse.ArgumentParser(
         description="Looking for changing files in directory.")
     parser.add_argument('directory', help='filename(s) to parse')
     parser.add_argument(
         '-e', '--ext', help='extension input')
     parser.add_argument(
-        '-i', '--int', default=1, type=float, help='polling interval period of time\
+        '-i', '--int', default=1.0, type=int, help='polling interval period of time\
                         between the end of the timeout period')
     parser.add_argument(
         '-t', '--txt', help='magic search')
@@ -86,8 +101,6 @@ def main(args):
     signal.signal(signal.SIGTERM, signal_handler)
     # Now my signal_handler will get called if OS sends
     # either of these to my process.
-
-
     while not exit_flag:
         try:
             # call my directory watching function
@@ -99,15 +112,11 @@ def main(args):
             # This is an UNHANDLED exception
             # Log an ERROR level message here
             pass
-
-
         # put a sleep inside my while loop so I don't peg the cpu usage at 100%
         # time.sleep(args.int)
-
     # final exit point happens here
     # Log a message that we are shutting down
     # Include the overall uptime since program start
-
 
 
 if __name__ == '__main__':
