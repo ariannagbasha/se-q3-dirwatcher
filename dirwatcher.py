@@ -71,14 +71,13 @@ def create_parser():
     """ """
     parser = argparse.ArgumentParser(
         description="Looking for changing files in directory.")
-    parser.add_argument('directory', help='filename(s) to parse')
+    parser.add_argument('directory', help='directory to watch')
+    parser.add_argument('txt', help="find magic")
     parser.add_argument(
-        '-e', '--ext', help='extension input')
+        '-e', '--ext', default='.txt', help='extension input')
     parser.add_argument(
         '-i', '--int', default=1.0, type=int, help='polling interval period of time\
                         between the end of the timeout period')
-    parser.add_argument(
-        '-t', '--txt', help='magic search')
     return parser
 
 
@@ -92,8 +91,7 @@ def signal_handler(sig_num, frame):
     """
     # log the associated signal name
     global exit_flag
-    if signal.Signals(sig_num).name == 'SIGINT':
-        logger.warning('Received ' + signal.Signals(sig_num).name)
+    logger.warning('Received ' + signal.Signals(sig_num).name)
     exit_flag = True
     return None
 
